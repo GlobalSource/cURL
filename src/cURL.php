@@ -56,9 +56,9 @@ class cURL
      *
      * [ WARNING: CSRF Verification need manual changes. ]
      *
-     * @param $url
-     * @param $uname
-     * @param $pass
+     * @param string $url to login.
+     * @param string $uname Username of a Account.
+     * @param string $pass Password of a Account.
      */
     public function curlLogin($url, $uname, $pass, $url_to_graph)
     {
@@ -111,8 +111,8 @@ class cURL
     /**
      * To Download file via cURL.
      *
-     * @param $file
-     * @param $destination
+     * @param string $file path to download.
+     * @param string $destination path to store.
      */
     public static function downloadFile($file, $destination)
     {
@@ -138,6 +138,20 @@ class cURL
         // Close File Connection.
         fclose($fp);
 
+    }
+
+    /**
+     * To Retrieve the list of Site Info.
+     *
+     * @param string $url to Fetch the Info.
+     * @return array mixed Info.
+     */
+    public function getSiteInfo($url)
+    {
+        $curlSession = curl_init($url);
+        curl_exec($curlSession);
+        $info = curl_getinfo($curlSession);
+        return $info;
     }
 
 

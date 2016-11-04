@@ -1,7 +1,6 @@
 <?php
 
 include_once('cURL.php');
-var_dump($_SERVER);
 
 /**
  * Class cURL_Helper
@@ -32,6 +31,9 @@ class cURL_Helper
         $curl->curlLogin($url, $uname, $pass, $url_to_graph);
     }
 
+    /**
+     * To Trigger the Download.
+     */
     public function download()
     {
         $curl = new cURL();
@@ -40,4 +42,13 @@ class cURL_Helper
         $curl->downloadFile($url, $destination);
     }
 
+    /**
+     * To Get list of Site Info.
+     */
+    public function getInfo()
+    {
+        $curl = new cURL();
+        $url = 'URL_TO_DOWNLOAD';
+        $curl->getSiteInfo($url);
+    }
 }
