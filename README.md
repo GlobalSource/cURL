@@ -2,4 +2,4 @@
 
 ___
 
-cURL package provides Collection of ** cURL Uitls ** to perform variety of task in PHP.
+cURL package provides Collection of **cURL Uitls** to perform variety of task in PHP.
