@@ -148,11 +148,40 @@ class cURL
      */
     public function getSiteInfo($url)
     {
+        // Pre-Init with URL.
         $curlSession = curl_init($url);
+        // Trigger the Execution.
         curl_exec($curlSession);
+        // Retrieve the Site Info.
         $info = curl_getinfo($curlSession);
+
         return $info;
     }
 
+    /**
+     * Remote Form Submission.
+     * @param string $url Path of form submission.
+     * @param string $params serialized form of data to submit.
+     */
+    public function submitForm($url, $params)
+    {
+        // Init cURL
+        $ch = curl_init();
+        // Setup the URL (path) of Submission.
+        curl_setopt($ch, CURLOPT_URL, $url);
+        // Enabling the Post level submission.
+        curl_setopt($ch, CURLOPT_POST, 1);
+        // Pluck Post data with cURL request.
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        // Set Transfer State.
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Trigger the cURL execution.
+        // TODO: Additional Operation with the Response.
+        $result = curl_exec($ch);
+
+        // Close the connection.
+        curl_close($ch);
+    }
 
 }
