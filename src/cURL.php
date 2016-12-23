@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class cURL
+ * Class cURL.
  *
  * List of cURL Utils to Boost-up the Access.
  */
@@ -13,7 +13,9 @@ class cURL
     public function __construct()
     {
         // To Verify that the cURL library is available or not.
-        if (!$this->check()) die("Sorry, you don't have cURL library to access this package.");
+        if (!$this->check()) {
+            die("Sorry, you don't have cURL library to access this package.");
+        }
     }
 
     /**
@@ -29,9 +31,9 @@ class cURL
     /**
      * To Call Specif URL and return the Data.
      *
-     * @param bool $return_transfer to Specify, transfer status is needed or not.
-     * @param bool $header to specify, the header of response is needed or not.
-     * @param string $url the path to call.
+     * @param bool   $return_transfer to Specify, transfer status is needed or not.
+     * @param bool   $header          to specify, the header of response is needed or not.
+     * @param string $url             the path to call.
      */
     public function curlCall($url, $return_transfer = true, $header = false)
     {
@@ -52,13 +54,13 @@ class cURL
     }
 
     /**
-     * Simple login Remote with cURL
+     * Simple login Remote with cURL.
      *
      * [ WARNING: CSRF Verification need manual changes. ]
      *
-     * @param string $url to login.
+     * @param string $url   to login.
      * @param string $uname Username of a Account.
-     * @param string $pass Password of a Account.
+     * @param string $pass  Password of a Account.
      */
     public function curlLogin($url, $uname, $pass, $url_to_graph)
     {
@@ -72,7 +74,7 @@ class cURL
         $cookie = 'cookie.txt';
 
         // This Post Data contents may change.
-        $postData = 'username=' . $uname . '&password=' . $pass . '&_csrf=' . $csrf;
+        $postData = 'username='.$uname.'&password='.$pass.'&_csrf='.$csrf;
 
         // Init cURL Session.
         $curlSession = curl_init();
@@ -84,14 +86,14 @@ class cURL
 
         curl_setopt($curlSession, CURLOPT_COOKIEJAR, $cookie);
 
-        curl_setopt($curlSession, CURLOPT_COOKIE, "cookiename=0");
+        curl_setopt($curlSession, CURLOPT_COOKIE, 'cookiename=0');
         curl_setopt($curlSession, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
         curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curlSession, CURLOPT_REFERER, $_SERVER['REQUEST_URI']);
         curl_setopt($curlSession, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($curlSession, CURLOPT_FOLLOWLOCATION, 0);
 
-        curl_setopt($curlSession, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($curlSession, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($curlSession, CURLOPT_POST, 1);
         curl_setopt($curlSession, CURLOPT_POSTFIELDS, $postData);
         curl_exec($curlSession);
@@ -107,11 +109,10 @@ class cURL
         echo $html;
     }
 
-
     /**
      * To Download file via cURL.
      *
-     * @param string $file path to download.
+     * @param string $file        path to download.
      * @param string $destination path to store.
      */
     public static function downloadFile($file, $destination)
@@ -137,13 +138,13 @@ class cURL
 
         // Close File Connection.
         fclose($fp);
-
     }
 
     /**
      * To Retrieve the list of Site Info.
      *
      * @param string $url to Fetch the Info.
+     *
      * @return array mixed Info.
      */
     public function getSiteInfo($url)
@@ -160,7 +161,8 @@ class cURL
 
     /**
      * Remote Form Submission.
-     * @param string $url Path of form submission.
+     *
+     * @param string $url    Path of form submission.
      * @param string $params serialized form of data to submit.
      */
     public function submitForm($url, $params)
@@ -183,5 +185,4 @@ class cURL
         // Close the connection.
         curl_close($ch);
     }
-
 }
